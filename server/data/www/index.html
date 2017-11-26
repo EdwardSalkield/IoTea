@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>IOTea</title>
+    <script src="main.js"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link href="main.css" rel="stylesheet">
+</head>
+<body>
+    <div id="modalHelp" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Help</h4>
+                </div>
+                <div class="modal-body">
+                    <p>
+                        This is IOTea, an internet-controlled tea brewer.<br /><br />
+                        This web interface connects to a physical tea-making machine. Simply enter the water temperature and brewing time you want and press the button, and it will heat the water, dispense the boiling water into a tea brewing vessel, brew the tea and dispense it into your cup, all automatically!<br /><br />
+                        This project was made for the 2017 Oxford Hack, and all the code is available on github (link).
+                    </p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">IOTea</a>
+            </div>
+            <div id="navbar" class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li class="active">
+                        <a href="#">Home</a>
+                    </li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="#" data-toggle="modal" data-target="#modalHelp">Help</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="container">
+        <form class="form-group" onsubmit="return submitValues($('#tempSlider').val(), $('#timeSlider').val());">
+            <p>Temperature (°C):</p>
+            <input class="form-control" type="number" value="80" name="tempBox" for="tempSlider" oninput="tempSlider.value=tempBox.value">
+            <input type="range" min="50" max="100" value="80" class="slider" id="tempSlider" name="tempSlider" for="tempBox" oninput="tempBox.value=tempSlider.value"><br />
+            <p>Brewing time (s):</p>
+            <input class="form-control" type="number" value="30" name="timeBox" for="timeSlider" oninput="timeSlider.value=timeBox.value">
+            <input type="range" min="1" max="300" value="30" class="slider" id="timeSlider" name="timeSlider" for="timeBox" oninput="timeBox.value=timeSlider.value">
+            <br />
+            <div class="btn-group">
+                <input type="submit" class="btn btn-primary" value="Make my tea!">
+                <button type="button" class="btn btn-primary" onclick="rinse();">Rinse</button>
+            </div>
+        </form>
+    </div>
+</body>
+</html>
+

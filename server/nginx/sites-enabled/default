@@ -1,0 +1,31 @@
+server {
+        listen 80 default_server;
+        listen [::]:80 default_server;
+
+        #location / {
+        #    root /data/www;
+        #}
+
+        location = /data/www/index.html {}
+
+        location ~ \.(html)$ {
+                root /data/www;
+        }
+        location ~ \.(js)$ {
+                root /data/js;
+        }
+        location ~ \.(gif|jpg|png)$ {
+            root /data/images;
+        }
+        location ~ \.(css)$ {
+            root /data/css;
+        }
+        location ~ \.(json)$ {
+            root /data/json;
+        }
+        location / {
+           proxy_pass http://localhost:8081;
+        }
+        server_name _;
+}
+
